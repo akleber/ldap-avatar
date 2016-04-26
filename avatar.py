@@ -86,13 +86,13 @@ class Avatar(object):
         img.thumbnail((size,size))
 
         file_out = io.BytesIO()
-        img.save(file_out, 'JPEG')
+        img.save(file_out, 'PNG')
 
         return file_out.getvalue()
 
 
     def on_get(self, req, resp, email_hash):
-        resp.content_type = "image/jpeg"
+        resp.content_type = "image/png"
 
         #cut possible extensions, we do not support them
         email_hash = email_hash[:32]
@@ -128,7 +128,7 @@ class Avatar(object):
                 icon.thumbnail((size,size))
 
                 b = io.BytesIO()
-                icon.save(b, 'JPEG',quality=90)
+                icon.save(b, 'PNG')
                 photo = b.getvalue()
 
                 self.put_photo_in_cache(email_hash, size, photo)
